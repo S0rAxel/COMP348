@@ -1,14 +1,12 @@
-import java.util.List;
-
 public interface Printable 
 {
     public void print();
 
-    public static void print(List<Printable> printableObjects)
+    public static void print(Printable[] varargs)
     {
-        for (Printable printableObject : printableObjects) 
+        for (Printable object : varargs) 
         {
-            printableObject.print();
+            object.print();
         }
     } 
 }
