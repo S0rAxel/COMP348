@@ -19,7 +19,7 @@ public class Circle extends PrintableObject implements Shape
 
     public double getArea() 
     {
-        return Math.PI * Math.pow(radius, 2);
+        return Math.PI * radius * radius;
     }
 
     public static Circle parse(String circleString)
