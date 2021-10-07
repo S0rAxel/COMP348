@@ -1,0 +1,25 @@
+ Input the name of the file to read: Shapes.txt
+
+ Reading from file...
+
+ Printing shapes from file:
+
+Rectangle, Side X: 4.0, Side Y: 3.0
+Circle, radius: 9.0
+Rectangle, Side X: 6.0, Side Y: 4.0
+Rectangle, Side X: 2.0, Side Y: 9.0
+Circle, radius: 5.0
+Rectangle, Side X: 5.0, Side Y: 9.0
+Circle, radius: 6.0
+
+ Sorting Array:
+
+ Printing sorted array: 
+
+Circle, radius: 5.0
+Circle, radius: 6.0
+Circle, radius: 9.0
+Rectangle, Side X: 4.0, Side Y: 3.0
+Rectangle, Side X: 2.0, Side Y: 9.0
+Rectangle, Side X: 6.0, Side Y: 4.0
+Rectangle, Side X: 5.0, Side Y: 9.0
