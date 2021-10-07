@@ -1,0 +1,13 @@
+- Array of 5 random numbers -
+        MINF: 4.0
+        MAXF: 22.0
+        SUMF: 50.0
+        AVGF: 10.0
+        SAVG: 13.0
+
+- Array of 10 random numbers -
+        MINF: 1.0
+        MAXF: 46.0
+        SUMF: 244.0
+        AVGF: 24.4
+        SAVG: 23.5

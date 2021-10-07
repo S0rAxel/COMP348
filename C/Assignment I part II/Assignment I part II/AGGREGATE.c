@@ -1,4 +1,4 @@
-
+#include <stdio.h>
 #include "AGGREGATE.h"
 
 float minf(float* arr, int size)
