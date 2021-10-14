@@ -1,14 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "AGGREGATE.h"
+#include "linkedList.h"
 
 // For demonstration purposes
 void iteration(float* arr, int size);
 
 const char* funcnames[] = { "MINF", "MAXF", "SUMF", "AVGF", "SAVG" };
 Aggregate agg = { minf, maxf, sumf, avgf, pseudo_avg };
-//float (*aggregates[5])(float* arr, int size) = { minf, maxf, sumf, avgf, pseudo_avg };
 
-main()
+void operations()
 {
 	float nums[5] = { 6, 4, 10, 22, 8 };
 	float moreNums[10] = { 1, 38, 37, 17, 31, 5, 46, 26, 3, 40 };
@@ -28,4 +29,20 @@ void iteration(float* arr, int size)
 		result = agg.aggregates[i](arr, size);
 		printf("\t%s: %0.1f\n", funcnames[i], result);
 	}
+}
+
+void linkedLists()
+{
+	list a = malloc(sizeof(list));
+	element e = { LIST,('1', '2') };
+	a->el = e;
+
+	print(a->el);
+}
+
+main()
+{
+	linkedLists();
+
+
 }

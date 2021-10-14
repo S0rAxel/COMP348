@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="AGGREGATE.c" />
     <ClCompile Include="Assignment I part II.c" />
+    <ClCompile Include="linkedList.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AGGREGATE.h" />
+    <ClInclude Include="linkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

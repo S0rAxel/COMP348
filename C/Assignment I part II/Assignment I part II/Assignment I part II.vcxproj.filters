@@ -21,9 +21,15 @@
     <ClCompile Include="AGGREGATE.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="linkedList.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AGGREGATE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
