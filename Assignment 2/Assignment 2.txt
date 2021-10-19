@@ -1,0 +1,10 @@
+
+(defun sub-list (l from &optional (to NIL))
+    (if (<= from 0)
+        (print "from is smaller or equal to 0")
+        (print "from is bigger than 0")
+        )
+    (print to)
+    )
+
+(sub-list '(1 2 3) 1)
