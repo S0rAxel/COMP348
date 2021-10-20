@@ -13,6 +13,7 @@ element aasel(atom a)
 element lasel(list l)
 {
 	element r = { .type = LIST, .l = &l };
+	return r;
 }
 
 element car(element e)
@@ -29,10 +30,13 @@ element car(element e)
 
 list cdr(element e)
 {
-	if (e.l->el.type == ATOM)
+	if (e.l->next == NULL)
 	{
-
-		//return e.l.el = NIL;
+		return e.l;
+	}
+	else if (e.l->el.type == ATOM)
+	{
+		return e.l->el.l;
 	}
 
 	return e.l->next->el.l;
@@ -78,13 +82,16 @@ void print(element e)
 	}
 	else if (e.type == LIST)
 	{
-		element s;
-		printf("(");
-		do {
-			s = e.l->el;
-			printf("%c ", s.a);
-
-		} while (s.a != NULL);
+		if (e.l == NULL)
+		{
+			atom a = e.a;
+			printf("(");
+			do {
+				printf("%c ", e.a);
+				if (e.l->next->el.a)
+					a = e.l->next->el.a;
+			} while (e.l->next != NULL);
+		}
 		printf(")");
 	}
 }
