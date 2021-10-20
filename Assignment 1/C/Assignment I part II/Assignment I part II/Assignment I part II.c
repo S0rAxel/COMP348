@@ -33,16 +33,13 @@ void iteration(float* arr, int size)
 
 void linkedLists()
 {
-	list a = malloc(sizeof(list));
-	element e = { LIST,('1', '2') };
-	a->el = e;
+	element e = aasel('a');
+	print(car(e));
 
-	print(a->el);
 }
 
 main()
 {
 	linkedLists();
-
 
 }
