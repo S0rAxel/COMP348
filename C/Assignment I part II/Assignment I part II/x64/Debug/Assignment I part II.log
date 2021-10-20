@@ -1,4 +1,0 @@
-﻿  linkedList.c
-C:\Users\Alex\Documents\School\Concordia\3rd Semester\COMP 348\Assignment I\COMP348\C\Assignment I part II\Assignment I part II\linkedList.c(15,1): warning C4047: 'initializing': '_listnode *' differs in levels of indirection from 'list *'
-C:\Users\Alex\Documents\School\Concordia\3rd Semester\COMP 348\Assignment I\COMP348\C\Assignment I part II\Assignment I part II\linkedList.c(21,17): warning C4047: '==': '_listnode *' differs in levels of indirection from 'int'
-  Assignment I part II.vcxproj -> C:\Users\Alex\Documents\School\Concordia\3rd Semester\COMP 348\Assignment I\COMP348\C\Assignment I part II\x64\Debug\Assignment I part II.exe
