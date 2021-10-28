@@ -21,8 +21,6 @@ typedef struct _listnode {
 	struct _listnode* next;
 } *list;
 
-
-
 element aasel(atom a);
 element lasel(list l);
 element car(element e);

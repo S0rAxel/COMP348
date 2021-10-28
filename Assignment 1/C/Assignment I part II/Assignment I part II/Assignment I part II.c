@@ -36,10 +36,12 @@ void linkedLists()
 	element e = aasel('a');
 	print(car(e));
 
+	//cons(aasel('e'), NULL v );
+
 }
 
 main()
 {
 	linkedLists();
-
+	//operations();
 }
