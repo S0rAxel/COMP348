@@ -1,15 +1,94 @@
 
-(defun sub-list (l from &optional (to NIL))
-    (if (<= from 0)
-        (print "from is smaller or equal to 0")
-        (print "from is bigger than 0")
-        )
-    (print to)
+(defun sub-list (l from &optional (to nil))
+    (cond 
+        ((null l) nil)
+        ((<= from 0) nil)
+        ((< 1 from) 
+            (if (null to)
+                (sub-list (cdr l) (- from 1))
+                (sub-list (cdr l) (- from 1) (- to 1))
+            ))
+        ((null to) l)
+        ((< (length l) to) nil)
+        ((< 0 to) 
+			(cons (car l) (sub-list (cdr l) from (- to 1))))
     )
+)
 
-(sub-list '(1 2 3) 1)
+; (print (sub-list '(5 6 7 8 9 1) 4 3))
+(print (sub-list '(1 4 10 8 9 1) 2 3)) ; output: (4 10)
+(print (sub-list '(1 4 10 8 9 1) 2 ))  ; output: (4 10 8 9 1)
+(print (sub-list '(1 4 10 8 9 1) 2 7)) ; output: NIL
+(print (sub-list '(1 4 10 8 9 1) 1 4)) ; output: (1 4 10 8)
+(print (sub-list '(1 4 10 8 9 1) 0 1)) ; output: NIL
+(print (sub-list '(1 4 10 8 9 1) 4 2)) ; output: NIL
+(print (sub-list '(1 4 10 8 9 1) 2 6)) ; output: (4 10 8 9 1)
+
+(defun sub-list2 (l from &optional (to nil))
+	    (cond 
+        ((null l) nil)
+        ((<= from 0) (sub-list2 l 1 to))
+        ((< 1 from) 
+            (if (null to)
+                (sub-list2 (cdr l) (- from 1))
+                (sub-list2 (cdr l) (- from 1) (- to 1))
+            ))
+        ((null to) l)
+        ((< 0 to) 
+			(cons (car l) (sub-list2 (cdr l) from (- to 1))))
+    )
+)
+
+(print (sub-list2 '(1 4 10 8 9 1) 2 3)) ; output: (4 10)
+(print (sub-list2 '(1 4 10 8 9 1) 2))   ; output: (4 10 8 9 1)   
+(print (sub-list2 '(1 4 10 8 9 1) 2 7)) ; output: (4 10 8 9 1)     
+(print (sub-list2 '(1 4 10 8 9 1) 1 4)) ; output: (1 4 10 8)
+(print (sub-list2 '(1 4 10 8 9 1) 0 1)) ; output: (1)
+(print (sub-list2 '(1 4 10 8 9 1) -1))  ; output: (1 4 10 8 9 1)
+(print (sub-list2 '(1 4 10 8 9 1) 4 2)) ; output: NIL
+
+(defun sub-list3 (l from &optional (to nil))
+	 (if (and (not to) (< from to))
+		()
+		((cond 
+        ((null l) nil)
+        ((<= from 0) (sub-list3 l 1 to))
+        ((< 1 from) 
+            (if (null to)
+                (sub-list3 (cdr l) (- from 1))
+                (sub-list3 (cdr l) (- from 1) (- to 1))
+            ))
+        ((null to) l)
+        ((< 0 to) 
+			(cons (car l) (sub-list3 (cdr l) from (- to 1))))
+		))
+	 )
+)
+
+(defun flatten-nums-nodup (l) 
+	(cond
+		((null l) nil)
+        ((member (car l) l) (flatten-nums-nodup (cdr l)))
+        ((atom (car l))
+            (if (numberp (car l))
+                (cons (car l) (flatten-nums-nodup (cdr l)))
+                (flatten-nums-nodup (cdr l))
+            )
+         )
+        ((listp (car l)) (mapcan #'flatten-nums-nodup l))
+	)
+)
+
+(print (flatten-nums-nodup '(1 2 (3 1) (a 2.5) (2 4.5) ((1 2)))))
 
 
+(defun tribonacci-seq (n)
+    (cond 
+        ((zerop n) nil)
+        ((<= n 2) 0)
+        ((= n 3) 1)
+        (t (+ (tribonacci-seq (- n 1)) (tribonacci-seq (- n 2)) (tribonacci-seq (- n 3))))
+    )
+)
 
-
-sub-list (cdr(l) n + 1 to)
+(print (tribonacci-seq 7))
