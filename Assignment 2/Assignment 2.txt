@@ -49,8 +49,7 @@
 
 (defun sub-list3 (l from &optional (to nil))
 	 (if (and (not to) (< from to))
-		()
-		((cond 
+		(cond 
         ((null l) nil)
         ((<= from 0) (sub-list3 l 1 to))
         ((< 1 from) 
@@ -61,7 +60,7 @@
         ((null to) l)
         ((< 0 to) 
 			(cons (car l) (sub-list3 (cdr l) from (- to 1))))
-		))
+		)
 	 )
 )
 
@@ -69,7 +68,7 @@
 	(cond
 		((null l) nil)
         ((member (car l) l) (flatten-nums-nodup (cdr l)))
-        ((atom (car l))
+        ((atom l)
             (if (numberp (car l))
                 (cons (car l) (flatten-nums-nodup (cdr l)))
                 (flatten-nums-nodup (cdr l))
@@ -81,14 +80,50 @@
 
 (print (flatten-nums-nodup '(1 2 (3 1) (a 2.5) (2 4.5) ((1 2)))))
 
+;A)
+(defun tribonacci-seqA (n)
+    (cond
+        ((zerop n) nil)
+        ((<= n 2) 0)
+        ((= n 3) 1)
+        (t (let (value)
+                (dotimes (i n value)
+                    (setq value (cons (+ (- n 1) (- n 2) (- n 3)) value))
+                )
+            )
+        )
+    )
+)
 
-(defun tribonacci-seq (n)
+(print (tribonacci-seqA 7)) ; output: 7,   expected: (0 0 1 1 2 4 7)
+(print (tribonacci-seqA 0)) ; output: nil
+(print (tribonacci-seqA 1)) ; output: 0
+
+;B) 
+(defun tribonacci-seqB (n)
     (cond 
         ((zerop n) nil)
         ((<= n 2) 0)
         ((= n 3) 1)
-        (t (+ (tribonacci-seq (- n 1)) (tribonacci-seq (- n 2)) (tribonacci-seq (- n 3))))
+        (t (+ (tribonacci-seqB (- n 1)) (tribonacci-seqB (- n 2)) (tribonacci-seqB (- n 3))))
     )
 )
 
-(print (tribonacci-seq 7))
+(print (tribonacci-seqB 7)) ; output: 7,   expected: (0 0 1 1 2 4 7)
+(print (tribonacci-seqB 0)) ; output: nil
+(print (tribonacci-seqB 1)) ; output: 0
+
+(defun depth (e)
+	(cond
+        ((atom (cdr e)) 0)
+        ((listp e) 
+           (+ 1 (apply #'max (mapcar #'depth e))) ; (mapcar #'depth e)))
+        )
+    ) 
+)
+
+(print (depth nil)) 			 ; output: 0
+(print (depth 1))				 ; output: 0 
+(print (depth '(1)))             ; output: 1
+(print (depth '((2))))           ; output: 2 
+(print (depth '((2)(3 (6))(4)))) ; output: 3
