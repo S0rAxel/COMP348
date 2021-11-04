@@ -65,39 +65,37 @@
 )
 
 (defun flatten-nums-nodup (l) 
-	(cond
-		((null l) nil)
-        ((member (car l) l) (flatten-nums-nodup (cdr l)))
-        ((atom l)
-            (if (numberp (car l))
-                (cons (car l) (flatten-nums-nodup (cdr l)))
-                (flatten-nums-nodup (cdr l))
-            )
-         )
-        ((listp (car l)) (mapcan #'flatten-nums-nodup l))
-	)
-)
-
-(print (flatten-nums-nodup '(1 2 (3 1) (a 2.5) (2 4.5) ((1 2)))))
-
-;A)
-(defun tribonacci-seqA (n)
     (cond
-        ((zerop n) nil)
-        ((<= n 2) 0)
-        ((= n 3) 1)
-        (t (let (value)
-                (dotimes (i n value)
-                    (setq value (cons (+ (- n 1) (- n 2) (- n 3)) value))
-                )
-            )
+       ( (null l) nil)
+       ( (atom (car l))
+           (if (numberp (car l))
+               (cons (car l) (flatten-nums-nodup (cdr l)))
+               (flatten-nums-nodup (cdr l))
+           )
         )
+        (t (append (flatten-nums-nodup (car l)) (flatten-nums-nodup (cdr l))))
     )
 )
 
-(print (tribonacci-seqA 7)) ; output: 7,   expected: (0 0 1 1 2 4 7)
+(print (flatten-nums-nodup '(1 2 (3 1) (a 2.5) (2 4.5) ((1 2))))) ;output: (1 2 3 1 2.5 2 4.5 1 2), expected: (1 2 3 2.5 4.5)
+
+;A)
+(defun tribonacci-seqA (n)
+    (let* ((a 0) (b -1) (c 1) (d 0) (l '()))     
+        (dotimes (i n l)
+            (setq d (+ a b c))
+            (setq a b)
+            (setq b c)
+            (setq c d)
+            (setq l (append l (list d)))
+        )
+     )
+    
+)
+
+(print (tribonacci-seqA 7)) ; output: (0 0 1 1 2 4 7)
 (print (tribonacci-seqA 0)) ; output: nil
-(print (tribonacci-seqA 1)) ; output: 0
+(print (tribonacci-seqA 1)) ; output: (0)
 
 ;B) 
 (defun tribonacci-seqB (n)
@@ -106,16 +104,29 @@
         ((<= n 2) 0)
         ((= n 3) 1)
         (t (+ (tribonacci-seqB (- n 1)) (tribonacci-seqB (- n 2)) (tribonacci-seqB (- n 3))))
+		;(t (cons n (+ (tribonacci-seqB (- (car n) 1)) (tribonacci-seqB (- (car n) 2)) (tribonacci-seqB (- (car n) 3)))))
     )
 )
 
-(print (tribonacci-seqB 7)) ; output: 7,   expected: (0 0 1 1 2 4 7)
+(defun tribonacci-seqB (n)
+    (let ( (a (list n)) )
+        (cond 
+            ( (zerop (car a)) nil)
+            ( (<= (car a) 2) (list 0))
+            ( (= (car a) 3) (list 1))
+            (t (cons (+ (car (tribonacci-seqB (- (car a) 1))) (car (tribonacci-seqB (- (car a) 2))) (car (tribonacci-seqB (- (car a) 3)))) a))
+    )
+    )
+)
+
+
+(print (tribonacci-seqB 7)) ; output: (7 7),   expected: (0 0 1 1 2 4 7)
 (print (tribonacci-seqB 0)) ; output: nil
 (print (tribonacci-seqB 1)) ; output: 0
 
 (defun depth (e)
 	(cond
-        ((atom (cdr e)) 0)
+        ((atom e) 0)
         ((listp e) 
            (+ 1 (apply #'max (mapcar #'depth e))) ; (mapcar #'depth e)))
         )
