@@ -1,4 +1,5 @@
 
+;Q1
 (defun sub-list (l from &optional (to nil))
     (cond 
         ((null l) nil)
@@ -15,7 +16,6 @@
     )
 )
 
-; (print (sub-list '(5 6 7 8 9 1) 4 3))
 (print (sub-list '(1 4 10 8 9 1) 2 3)) ; output: (4 10)
 (print (sub-list '(1 4 10 8 9 1) 2 ))  ; output: (4 10 8 9 1)
 (print (sub-list '(1 4 10 8 9 1) 2 7)) ; output: NIL
@@ -24,6 +24,7 @@
 (print (sub-list '(1 4 10 8 9 1) 4 2)) ; output: NIL
 (print (sub-list '(1 4 10 8 9 1) 2 6)) ; output: (4 10 8 9 1)
 
+; Q2
 (defun sub-list2 (l from &optional (to nil))
 	    (cond 
         ((null l) nil)
@@ -47,6 +48,7 @@
 (print (sub-list2 '(1 4 10 8 9 1) -1))  ; output: (1 4 10 8 9 1)
 (print (sub-list2 '(1 4 10 8 9 1) 4 2)) ; output: NIL
 
+; Q3
 (defun sub-list3 (l from &optional (to nil))
 	 (if (and (not to) (< from to))
 		(cond 
@@ -64,6 +66,7 @@
 	 )
 )
 
+; Q4
 (defun flatten-nums-nodup (l) 
     (cond
        ( (null l) nil)
@@ -79,6 +82,7 @@
 
 (print (flatten-nums-nodup '(1 2 (3 1) (a 2.5) (2 4.5) ((1 2))))) ;output: (1 2 3 1 2.5 2 4.5 1 2), expected: (1 2 3 2.5 4.5)
 
+; Q5
 ;A)
 (defun tribonacci-seqA (n)
     (let* ((a 0) (b -1) (c 1) (d 0) (l '()))     
@@ -115,7 +119,7 @@
             ( (<= (car a) 2) (list 0))
             ( (= (car a) 3) (list 1))
             (t (cons (+ (car (tribonacci-seqB (- (car a) 1))) (car (tribonacci-seqB (- (car a) 2))) (car (tribonacci-seqB (- (car a) 3)))) a))
-    )
+		)
     )
 )
 
@@ -124,6 +128,7 @@
 (print (tribonacci-seqB 0)) ; output: nil
 (print (tribonacci-seqB 1)) ; output: 0
 
+; Q6
 (defun depth (e)
 	(cond
         ((atom e) 0)
@@ -138,3 +143,100 @@
 (print (depth '(1)))             ; output: 1
 (print (depth '((2))))           ; output: 2 
 (print (depth '((2)(3 (6))(4)))) ; output: 3
+	
+; Q8
+
+;(car t)					root
+;(car (car (cdr t)))		left child node
+;(car (car (cdr (cdr t))))	right child node
+;(car (cdr t))				left child
+;(car (cdr (cdr t)))		rifgt child
+
+(defun isBST (tr)		
+    (cond
+        ( (atom tr) nil) 
+        ( (and (not (eq (car (cdr tr)) ())) (not (eq (car (cdr (cdr tr))) ())))
+            (if (and (or (> (car tr) (car (car (cdr tr)))) (= (car tr) (car (car (cdr tr)))) (< (car tr) (car (car (cdr (cdr tr)))))))
+                (progn
+                    (isBST (car (cdr tr)))
+                    (isBST (car (cdr (cdr tr))))
+                )
+                nil
+            )        
+        )
+        ( (and (not (eq (car (cdr tr)) () )) (eq (car (cdr (cdr tr))) () ))
+              (if (or (> (car tr) (car (car (cdr tr)))	) (= (car tr) (car (car (cdr tr))))) 
+                 (isBST (car (cdr tr)))
+                 nil
+              )
+        )		  
+        ( (and (eq (car (cdr tr)) () ) (not (eq (car (cdr (cdr tr))) () ) ))
+            (if (< (car tr) (car (car (cdr (cdr tr)))))         
+                (isBST (car (cdr (cdr tr))))
+                nil        
+            )
+        )
+        ( (and (eq (car (cdr tr)) () ) (eq (car (cdr (cdr tr))) () )) t)
+    )
+)
+
+
+(print (isBST '(8 (3 (1 () ()) 6 (6 (4 () ())(7 () ()))) (10 () (14 (15 () () ) ()))))) ;output: nil
+(print (isBST '(8 (3 (1 () ()) (6 (4 () ())(7 () ()))) (10 () (14 (13 () ()) ())))))	;output: t
+(print (isBST '(8 () ()))) ;output: t
+
+; Q9
+
+(defun in-order(tr)
+    (if (null tr)
+        nil
+        (append 
+            (in-order 
+				(cond 
+					((null tr) nil)
+					((not (listp tr)) nil)
+					(t (car (cdr tr)))
+				)
+			)
+            
+			(list (car tr))
+			 
+			(in-order 
+				(cond 
+					((null tr) nil)
+					((not (listp tr)) nil)
+					(t (car (cdr (cdr tr))))
+				)
+			)
+		)			
+	)
+)
+
+
+(defun pre-order(tr)
+    (if (null tr) 
+        nil   
+        (cons (car tr)
+		   (append 
+				(pre-order    
+					(cond 
+						( (null tr) nil)
+                        ( (not (listp tr)) nil)
+                        (t (car (cdr tr)))
+                    )
+				)
+				(pre-order 
+					(cond 
+						( (null tr) nil)
+						( (not (listp tr)) nil)
+						(t (car (cdr (cdr tr))))
+					)
+				)
+			)
+		)
+    )
+)
+
+
+(print (in-order '(+ (- (1 () ()) (* (4 () ())(7 () ()))) (/ (7 () ()) (6 () ()))))) 	; output: (1 - 4 * 7 + 7 / 6)
+(print (pre-order '(+ (- (1 () ()) (* (4 () ())(7 () ()))) (/ (7 () ()) (6 () ()))))) ; output: (+ - 1 * 4 7 / 7 6)
