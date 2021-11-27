@@ -1,0 +1,18 @@
+
+name(alejandro).
+
+student_id(40174159).
+
+name_id(alejandro, 40174159).
+
+course(programming_principles, 348).
+course(sysyem_hardware, 228).
+course(data_structure, 352).
+course(advaced_programming, 345).
+
+course_student(alejandro, 348).
+course_student(alejandro, 228).
+course_student(alejandro, 352).
+course_student(alejandro, 345).
+
+course_taken(S) :- course_student(S, C), course(_, C).

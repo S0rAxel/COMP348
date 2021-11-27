@@ -204,6 +204,8 @@ class Rhombus(Shape):
 
 #Q6
 
+shapes = {'Shape': 0, 'Circle': 0, 'Ellipse': 0, 'Rhombus': 0}
+
 file = open("Shapes.txt", "r")
 
 for l in file.readlines():
@@ -211,15 +213,20 @@ for l in file.readlines():
     
     if re.search("shape", l):
         shape = Shape()
+        shapes['Shape'] += 1
         shape.print()
     elif re.search("circle", l):
         circle = Circle(int(line[1]))
+        shapes['Shape'] += 1
+        shapes['Circle'] += 1
         circle.print()
     elif re.search("ellipse", l):
         numA = int(line[1])
         numB = int(line[2])
         if numA > 0 or numB > 0:
             elipse = Elipse(numA, numB)
+            shapes['Shape'] += 1
+            shapes['Ellipse'] += 1
             elipse.print()
             print("linear eccentricity: " + str(elipse.eccentricity()))
         else:
@@ -227,6 +234,8 @@ for l in file.readlines():
     elif re.search("rhombus", l):
         if int(line[1]) > 0 or int(line[2]) > 0:
             rhombus = Rhombus(int(line[1]), int(line[2]))
+            shapes['Shape'] += 1
+            shapes['Rhombus'] += 1
             rhombus.print()
             print("in-radius: " + str(rhombus.inradius()))
         else:
@@ -235,3 +244,8 @@ for l in file.readlines():
 file.close()
 
 #Q7
+print("Stadistics:")
+print("\tCircle(s):", shapes["Circle"])
+print("\tEllipse(s):", shapes["Ellipse"])
+print("\tRhombus(es):", shapes["Rhombus"])
+print("\tShape(s):", shapes["Shape"])
